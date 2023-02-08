@@ -108,11 +108,15 @@ class GroupController extends Controller
         ->orderBy('lastname')
         ->get();
 
+        $everyone = DB::table('people')
+        ->get();
+
         return view('Group.g_edit')
         ->with('group', $group)
         ->with('allpeople', $allpeople)
         ->with('nonmembers', $nonmembers)
-        ->with('members', $members);
+        ->with('members', $members)
+        ->with('everyone', $everyone);
     }
 
     /**

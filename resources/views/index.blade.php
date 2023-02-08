@@ -29,15 +29,15 @@
         <div style="height:20px"></div>
 
         <div class="row">
-            <div class="col"></div>
-            <div class="col">
+            <div class="col-3"></div>
+            <div class="col-6">
                 <h2>Üdvözöllek</h2>
-                <p class="pt-1">Ez a webalkalmazás egy hipotetikus embercsoport egymás közti kapcsolatainak kezelésére, és lehetséges barátcsoportok létrehozására szolgál. A weboldal 3 modulból épül fel, amiket a navigációs soron megtalálsz.</p>
-                <p class="pt-1"></p>
-
-
+                <p class="pt-1" style="text-align:justify">Ez a webalkalmazás egy hipotetikus embercsoport egymás közti kapcsolatainak kezelésére, és lehetséges barátcsoportok létrehozására szolgál. A weboldal 3 modulból épül fel, amiket a navigációs soron megtalálsz.</p>
+                <p class="pt-1" style="text-align:justify">Az elsővel, az "<a href="{{ route('People.Create') }}">Emberek hozzáadásával</a>", a 'People' adattáblához lehet embereket hozzáfűzni.</p>
+                <p class="pt-1" style="text-align:justify">A másodikra, az "<a href="{{ route('People.Manage') }}">Ember szerkesztésére</a>", rákattintva, először is a már létrehozott adatsorokat lehet megtekinteni, ha van ilyen. Ellenkező esetben az oldal arra utasít bennünket, hogy adjuk a 'People' táblához egy sort. Ha nem üres a 'People' tábla, akkor soronként módosíthatjuk az adatait, valamint az illető kapcsolatait lehet szerkeszteni itt, a 'Relationship' táblán végzett változtatásokkal. Továbbá meg lehet tekinteni, hogy adott ember milyen barátcsoportok tagja, és szükség esetén ki lehet léptetni ezekből.</p>
+                <p class="pt-1" style="text-align:justify">Végül, a "<a href="{{ route('Group.Manage') }}">Barátcsoportok szerkesztésére</a>" navigálva, először arra utasít bennünket a weboldal, hogy hozzunk létre csoportot. Ha már léteznek csoportok, akkor ugyanitt a 'Groups' tábla tartalmát láthatjuk listázva. Ezekhez tudunk új táblát adni, illetve a meglévőket szerkeszthetjük.
             </div>
-            <div class="col"></div>
+            <div class="col-3"></div>
         </div>
     </body>
 </html>

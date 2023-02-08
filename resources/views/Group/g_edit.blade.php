@@ -100,7 +100,23 @@
 
             {{-- COL 2 --}}
             <div style="margin-right:15px" class="col">
-                @if (count($members) == 0)
+                @if (count($everyone) == 0)
+                <h4>Még nincs ember, akit a csoporthoz lehetne adni.</h4>
+                <p style="text-align:justify"><a href="{{ route('People.Create') }}">Adj embereket</a> az adatbázishoz!</p>
+
+                @elseif (count($everyone) == 1)
+                <h4>Barátcsoporthoz csak barátokat, vagy azok barátait lehet hozzáadni.</h4>
+                <p style="text-align:justify">Adj a rendszerhez <a href="{{ route('People.Create') }}">még egy embert</a>, majd szerkeszd valamelyiküket, hogy barátok legyenek!</p>
+
+                @elseif (count($everyone) == 2 && count($allpeople) == 0)
+                <h4>Olyan közel vagy...</h4>
+                <p style="text-align:justify">Hogy már-már azt hiszem direkt csinálod. <a href="{{ route('People.Manage') }}">Szerkeszd meg valamelyik jó madarat, hogy barátok legyenek, és akkor már lesz értelme ennek a résznek.
+                
+                @elseif (count($allpeople) == 0 && count($members) == 0)
+                <h4>Látom nem szereted a linkeket, sem az utasításokat...</h4>
+                <p style="text-align:justify">De nem fogsz ki rajtam. Amíg nem lesz legalább egy ember egy másik barátja, nem engedem, hogy itt bármit is csinálj!
+
+                @elseif (count($members) == 0)
                 <h4>Tagok hozzáadása</h4>
                 <table class="table table-dark table-striped">
                     <tr>
@@ -154,7 +170,7 @@
                    
                     </table>  
                     @endif
-                    @endif
+                @endif
             </div>
 
         </div>

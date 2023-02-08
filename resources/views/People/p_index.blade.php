@@ -66,8 +66,10 @@
                     @endforeach
                 </table>
                 @else
+                <div>
                 <h4>Még nincsenek emberek az adatbázisban...</h4>
-                <p>Adj hozzá <a class="nav-link" href="{{ route('People.Create') }}">itt</a>
+                <p>Adj hozzá <a href="{{ route('People.Create') }}">itt</a>!</p>
+                </div>
 
                 @endif
             </div>
