@@ -42,7 +42,7 @@ class GroupPersonController extends Controller
             'people_id' => $request->memberID
         ]);
 
-        return back();
+        return redirect(route('Group.Edit', $request->groupID));
     }
 
     /**

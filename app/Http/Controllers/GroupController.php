@@ -19,8 +19,6 @@ class GroupController extends Controller
         ->select('id', 'group_name')
         ->orderBy('group_name')
         ->get();
-        
-        
 
         return view('Group.g_index')
         ->with('groups', $groups);
@@ -79,6 +77,11 @@ class GroupController extends Controller
         ->where('id', $id)
         ->get();
 
+        $allpeople = DB::table('people')
+        ->select('id', 'lastname', 'firstname')
+        ->orderby('lastname')
+        ->get();
+
         $memberIDshelper = DB::table('group_person')
         ->select('people_id')
         ->where('group_id', $id);
@@ -89,8 +92,16 @@ class GroupController extends Controller
         ->orderBy('lastname')
         ->get();
         
+        $fofID = DB::table('relationships')
+        ->select('person_id', 'friend_id')
+        ->whereIn('person_id', $memberIDshelper)
+        ->orWhereIn('friend_id', $memberIDshelper);
+
         $nonmembers = DB::table('people')
         ->select('id', 'lastname', 'firstname')
+        ->whereNotIn('id', $memberIDshelper)
+        ->whereIn('id', $fofID->select('person_id'))
+        ->orWhereIn('id', $fofID->select('friend_id'))
         ->whereNotIn('id', $memberIDshelper)
         ->orderBy('lastname')
         ->get();
@@ -102,6 +113,7 @@ class GroupController extends Controller
 
         return view('Group.g_edit')
         ->with('group', $group)
+        ->with('allpeople', $allpeople)
         ->with('membersID', $membersID)
         ->with('nonmembers', $nonmembers)
         ->with('members', $members);

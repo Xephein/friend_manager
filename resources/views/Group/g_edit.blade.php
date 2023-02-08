@@ -81,7 +81,7 @@
 
             {{-- COL 2 --}}
             <div style="margin-right:15px" class="col">
-                @if (count($nonmembers) != 0)
+                @if (count($members) == 0)
                 <h4>Tagok hozzáadása</h4>
                 <table class="table table-dark table-striped">
                     <tr>
@@ -89,15 +89,15 @@
                         <th>Utónév</th>
                         <th></th>
                     </tr>
-                @foreach ($nonmembers as $nonmember)
+                @foreach ($allpeople as $person)
                     <tr>
                     <form action="{{ route('Grpmbr.Store') }}" method="POST">
                     @csrf
                         
                         <input type="hidden" value="{{ $group[0]->id }}" name="groupID">
-                        <input type="hidden" value="{{ $nonmember->id }}" name="memberID">
-                        <td>{{ $nonmember->lastname }}</td>
-                        <td>{{ $nonmember->firstname }}</td>
+                        <input type="hidden" value="{{ $person->id }}" name="memberID">
+                        <td>{{ $person->lastname }}</td>
+                        <td>{{ $person->firstname }}</td>
                         <td>
                             <button type="submit" class="badge bg-success" style="float:right">Hozzáadás</button>
                         </td>
@@ -105,7 +105,37 @@
                     </tr>
                 @endforeach
                 </table>
-                @endif
+                {{-- Ha már van tag --}}
+                @else
+                    @if (count($nonmembers) == 0)
+                        <h4> Mindenki a csoport tagja, aki a csoport tagja lehet. </h4>
+                    @else
+                    <h4>Tagok hozzáadása</h4>
+                    <table class="table table-dark table-striped">
+                        <tr>
+                            <th>Vezetéknév</th>
+                            <th>Utónév</th>
+                            <th></th>
+                        </tr>
+                    @foreach ($nonmembers as $fof)
+                        <tr>
+                        <form action="{{ route('Grpmbr.Store') }}" method="POST">
+                        @csrf
+                            
+                            <input type="hidden" value="{{ $group[0]->id }}" name="groupID">
+                            <input type="hidden" value="{{ $fof->id }}" name="memberID">
+                            <td>{{ $fof->lastname }}</td>
+                            <td>{{ $fof->firstname }}</td>
+                            <td>
+                                <button type="submit" class="badge bg-success" style="float:right">Hozzáadás</button>
+                            </td>
+                        </form>
+                        </tr>
+                    @endforeach
+                   
+                    </table>  
+                    @endif
+                    @endif
             </div>
 
         </div>

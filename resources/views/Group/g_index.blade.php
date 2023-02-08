@@ -46,7 +46,7 @@
                 @foreach ($groups as $group)
                     <tr>
                         <td>{{ $group->group_name }}</td>
-                        <td>{{  }}</td>
+                        <td></td>
                         <td>
                             <a href="{{ route('Group.Edit', $group->id) }}"><button style="float:left" type="button" class="badge bg-warning">Szerkesztés</button></a>
                             <form action="{{ route('Group.Destroy', $group->id) }}" method="POST">
