@@ -86,7 +86,7 @@ class GroupPersonController extends Controller
      */
     public function destroy($group_id, $member_id)
     {
-        $temp = DB::table('group_person')
+        $deleted = DB::table('group_person')
         ->where('group_id', $group_id)
         ->where('people_id', $member_id)
         ->delete();

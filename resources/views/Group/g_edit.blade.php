@@ -110,7 +110,7 @@
 
                 @elseif (count($everyone) == 2 && count($allpeople) == 0)
                 <h4>Olyan közel vagy...</h4>
-                <p style="text-align:justify">Hogy már-már azt hiszem direkt csinálod. <a href="{{ route('People.Manage') }}">Szerkeszd meg valamelyik jó madarat, hogy barátok legyenek, és akkor már lesz értelme ennek a résznek.
+                <p style="text-align:justify">Hogy már-már azt hiszem direkt csinálod. <a href="{{ route('People.Manage') }}">Szerkeszd meg</a> valamelyik jó madarat, hogy barátok legyenek, és akkor már lesz értelme ennek a résznek.
                 
                 @elseif (count($allpeople) == 0 && count($members) == 0)
                 <h4>Látom nem szereted a linkeket, sem az utasításokat...</h4>
