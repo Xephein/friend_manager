@@ -35,7 +35,6 @@ class GroupPersonController extends Controller
      */
     public function store(Request $request)
     {
-
         DB::table('group_person')
         ->insert([
             'group_id' => $request->groupID,

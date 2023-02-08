@@ -79,6 +79,8 @@ class GroupController extends Controller
 
         $allpeople = DB::table('people')
         ->select('id', 'lastname', 'firstname')
+        ->whereIn('id', DB::table('relationships')->select('person_id'))
+        ->orWhereIn('id', DB::table('relationships')->select('friend_id'))
         ->orderby('lastname')
         ->get();
 
@@ -86,17 +88,27 @@ class GroupController extends Controller
         ->select('people_id')
         ->where('group_id', $id);
 
+        $fofID = DB::table('relationships')
+        ->select('person_id', 'friend_id')
+        ->whereIn('person_id', $memberIDshelper)
+        ->orWhereIn('friend_id', $memberIDshelper);
+        
+        $possMembers = DB::table('people')
+        ->select('id')
+        ->whereIn('id', $fofID->select('person_id'))
+        ->orWhereIn('id', $fofID->select('friend_id'));
+        
+        $deleted = DB::table('group_person')
+        ->where('group_id', $id)
+        ->whereNotIn('people_id', $possMembers)
+        ->delete();
+
         $members = DB::table('people')
         ->select('id', 'lastname', 'firstname')
         ->whereIn('id', $memberIDshelper)
         ->orderBy('lastname')
         ->get();
         
-        $fofID = DB::table('relationships')
-        ->select('person_id', 'friend_id')
-        ->whereIn('person_id', $memberIDshelper)
-        ->orWhereIn('friend_id', $memberIDshelper);
-
         $nonmembers = DB::table('people')
         ->select('id', 'lastname', 'firstname')
         ->whereNotIn('id', $memberIDshelper)
@@ -106,15 +118,9 @@ class GroupController extends Controller
         ->orderBy('lastname')
         ->get();
 
-        $membersID = DB::table('group_person')
-        ->select('group_id', 'people_id')
-        ->where('group_id', $id)
-        ->get();
-
         return view('Group.g_edit')
         ->with('group', $group)
         ->with('allpeople', $allpeople)
-        ->with('membersID', $membersID)
         ->with('nonmembers', $nonmembers)
         ->with('members', $members);
     }
