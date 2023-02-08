@@ -124,6 +124,12 @@ class PersonController extends Controller
         ->whereNotIn('id', $nonfriendids)
         ->get();
 
+        $friendgroups = DB::table('groups')
+        ->join('group_person', 'group_person.group_id', '=', 'groups.id')
+        ->select('id', 'group_name')
+        ->where('people_id', $id)
+        ->get();
+        
         $person = Person::find($id);
         return view('People.p_edit', [
             'person' => Person::where('id')
@@ -131,7 +137,8 @@ class PersonController extends Controller
         ->with('person', $person)
         ->with('friends', $friends)
         ->with('nonfriends', $nonfriends)
-        ->with('friendquery', $friendquery);
+        ->with('friendquery', $friendquery)
+        ->with('friendgroups', $friendgroups);
     }
 
     /**

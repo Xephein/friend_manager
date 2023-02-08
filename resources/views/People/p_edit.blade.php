@@ -33,9 +33,7 @@
 
             {{-- COL 1 --}}
             <div class="col">
-                <table>
-                    Emberek táblája
-                </table>
+                {{-- Szerkesztéshez gyorsnavigációs lista jöhetne ide --}}
             </div>
 
             {{-- COL 2 --}}
@@ -70,14 +68,37 @@
 
             {{-- COL 3 --}}
             <div class="col">
-            TEST2
+            @if (count($friendgroups) == 0)
+            <h4>{{ $person->firstname }} nem tagja egy barátcsoportnak sem.</h4>
+            @else
+            <h4>Barátcsoportok</h4>
+            <table class="table table-dark table-striped">
+                <tr>
+                    <th>Csoport neve</th>
+                    <th></th>
+                </tr>
+            @foreach ($friendgroups as $fgroup)
+                <form action="{{ route('Grpmbr.Destroy', [$fgroup->id, $person->id])  }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <tr>
+                    <input type="hidden" value="{{ $person->id }}">
+                    <td>{{ $fgroup->group_name }}</td>
+                    <td><button style="float:right" class="badge bg-danger">Kilépés</button></td>
+                </tr>
+                </form>
+            @endforeach
+            </table>
+            @endif
             </div>
+            {{-- COL 4 --}}
+            <div class="col"></div>
         </div>
         
         {{-- ROW 2 --}}
         <div class="row" style="margin:30px 15px 0px 15px">
             {{-- COL 1 --}}
-            <div class="col">TEST</div>
+            <div class="col"></div>
             {{-- COL 2 --}}
             <div class="col"> 
                 @if (count($friends) != 0)
@@ -136,7 +157,8 @@
                     </table>
                 @endif
             </div>
-            
+            {{-- COL 4 --}}
+            <div class="col"></div>
         
         </div>
 

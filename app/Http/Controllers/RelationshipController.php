@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Relationship;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RelationshipController extends Controller
 {
@@ -90,8 +91,43 @@ class RelationshipController extends Controller
      */
     public function destroy($id)
     {
+        $relation = Relationship::find($id);
+        
+        $IDs = [$relation->person_id, $relation->friend_id];
+        
         Relationship::destroy($id);
 
+        $groupsToCheck = DB::table('group_person')
+        ->select('group_id')
+        ->whereIn('people_id', $IDs)
+        ->get();
+
+        foreach ($groupsToCheck as $group) {
+
+            echo($group->group_id);
+
+            $memberIDshelper = DB::table('group_person')
+            ->select('people_id')
+            ->where('group_id', $group->group_id);
+
+            echo($memberIDshelper->get());
+
+            $fofID = DB::table('relationships')
+            ->select('person_id', 'friend_id')
+            ->whereIn('person_id', $memberIDshelper)
+            ->orWhereIn('friend_id', $memberIDshelper);
+
+            $possMembers = DB::table('people')
+            ->select('id')
+            ->whereIn('id', $fofID->select('person_id'))
+            ->orWhereIn('id', $fofID->select('friend_id'));
+
+            $deletenotposs = DB::table('group_person')
+            ->where('group_id', $group->group_id)
+            ->whereNotIn('people_id', $possMembers)
+            ->delete();
+        }
+       
         return back();
     }
 }

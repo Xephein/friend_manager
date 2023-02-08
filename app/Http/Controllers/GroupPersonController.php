@@ -80,16 +80,36 @@ class GroupPersonController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     * @param  int  $group_id
+     * @param  int  $member_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($group_id, $member_id)
     {
-        DB::table('group_person')
-        ->where('people_id', $id)
+        $deleted = DB::table('group_person')
+        ->where('group_id', $group_id)
+        ->where('people_id', $member_id)
         ->delete();
-    
+
+        $memberIDshelper = DB::table('group_person')
+        ->select('people_id')
+        ->where('group_id', $group_id);
+
+        $fofID = DB::table('relationships')
+        ->select('person_id', 'friend_id')
+        ->whereIn('person_id', $memberIDshelper)
+        ->orWhereIn('friend_id', $memberIDshelper);
+        
+        $possMembers = DB::table('people')
+        ->select('id')
+        ->whereIn('id', $fofID->select('person_id'))
+        ->orWhereIn('id', $fofID->select('friend_id'));
+
+        $deletenotposs = DB::table('group_person')
+        ->where('group_id', $group_id)
+        ->whereNotIn('people_id', $possMembers)
+        ->delete();
+
         return back();
     }
 }

@@ -43,7 +43,7 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'groupname' => 'required|max:255|alpha_num',
+            'groupname' => 'required|max:255|string',
         ]);
 
         $group = new Group();
@@ -92,16 +92,6 @@ class GroupController extends Controller
         ->select('person_id', 'friend_id')
         ->whereIn('person_id', $memberIDshelper)
         ->orWhereIn('friend_id', $memberIDshelper);
-        
-        $possMembers = DB::table('people')
-        ->select('id')
-        ->whereIn('id', $fofID->select('person_id'))
-        ->orWhereIn('id', $fofID->select('friend_id'));
-        
-        $deleted = DB::table('group_person')
-        ->where('group_id', $id)
-        ->whereNotIn('people_id', $possMembers)
-        ->delete();
 
         $members = DB::table('people')
         ->select('id', 'lastname', 'firstname')
