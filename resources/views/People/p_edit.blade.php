@@ -38,7 +38,12 @@
 
             {{-- COL 2 --}}
             <div class="col">
-
+                @if (session()->has('message'))
+                    <div class="alert alert-success">
+                        <p><h4>Figyelem!</h4>
+                        <p>{{ session()->get('message') }}
+                    </div>
+                @endif
                 <form action="{{ route('People.Update', $person->id) }}" method="POST">
                 @csrf
                 @method('PATCH')
@@ -92,7 +97,9 @@
             @endif
             </div>
             {{-- COL 4 --}}
-            <div class="col"></div>
+            <div class="col">
+                {{-- Elérhető csoportokhoz csatlakozási lehetőség --}}
+            </div>
         </div>
         
         {{-- ROW 2 --}}

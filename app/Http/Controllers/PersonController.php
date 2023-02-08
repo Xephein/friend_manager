@@ -52,7 +52,7 @@ class PersonController extends Controller
         $person->firstname = $request->firstname;
         $person->save();
 
-        return redirect(route('People.Manage'));
+        return redirect(route('People.Create'))->with('message', $person->lastname . ' ' . $person->firstname . ' hozzáadva az adattáblához.');
     }
 
     /**
@@ -161,7 +161,7 @@ class PersonController extends Controller
             'firstname' => $request->firstname
         ]);
 
-        return redirect(route('People.Manage'));
+        return redirect(route('People.Edit', $id))->with('message', 'Sikeres módosítás.');
     }
 
     /**
@@ -172,9 +172,16 @@ class PersonController extends Controller
      */
     public function destroy($id)
     {
+        $temp = DB::table('people')
+        ->where('id', $id)
+        ->get();
+
+        $deleted = [$temp[0]->lastname,$temp[0]->firstname];
+
         Person::destroy($id);
+
     
-        return redirect(route('People.Manage'))->with('message', 'Sor eltávolítva az adatbázisból.');
+        return redirect(route('People.Manage'))->with('message', $deleted[0] . ' ' . $deleted[1] . ' eltávolítva az adattáblából.');
     }
 
 }

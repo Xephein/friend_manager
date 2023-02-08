@@ -26,8 +26,18 @@
             </div>
         </nav>
 
+        <div style="height:20px"></div>
 
-        <div>Leírás a használatról</div>
-        <div></div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <h2>Üdvözöllek</h2>
+                <p class="pt-1">Ez a webalkalmazás egy hipotetikus embercsoport egymás közti kapcsolatainak kezelésére, és lehetséges barátcsoportok létrehozására szolgál. A weboldal 3 modulból épül fel, amiket a navigációs soron megtalálsz.</p>
+                <p class="pt-1"></p>
+
+
+            </div>
+            <div class="col"></div>
+        </div>
     </body>
 </html>

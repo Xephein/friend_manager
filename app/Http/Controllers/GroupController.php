@@ -132,7 +132,7 @@ class GroupController extends Controller
             'group_name' => $request->groupname,
         ]);
 
-        return redirect(route('Group.Edit', $id));
+        return redirect(route('Group.Edit', $id))->with('message', 'Sikeres Módosítás');
     }
 
     /**

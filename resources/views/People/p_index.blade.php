@@ -37,8 +37,8 @@
             <div class="col">
                 @if (session()->has('message'))
                     <div class="alert alert-danger">
-                        <p><h4>Figyelem</h4>
-                        <p>{{ session()->get('message') }}
+                        <h4>Figyelem!</h4>
+                        {{ session()->get('message') }}
                     </div>
                 @endif
                 @if (count($people) != 0)
@@ -47,7 +47,7 @@
                         {{-- <th>ID</th> --}}
                         <th>Vezetéknév</th>
                         <th>Utónév</th>
-                        <th></th>
+                        <th><a href="{{ route('People.Create') }}"><button style="float:right" class="badge bg-primary">Ember hozzáadása</button></a></th>
                     </tr>
                     @foreach ($people as $person)
                         <tr>

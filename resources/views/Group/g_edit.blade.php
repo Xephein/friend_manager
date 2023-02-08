@@ -31,6 +31,25 @@
         {{-- ROW 1 --}}
         <div class="row">
             {{-- COL 1 --}}
+            <div class="col-3"></div>
+
+            {{-- COL 2 --}}
+            <div class="col-6">
+                @if (session()->has('message'))
+                <div class="alert alert-success">
+                    <p><h4>Figyelem!</h4>
+                    <p>{{ session()->get('message') }}
+                </div>
+                @endif
+            </div>
+
+            {{-- COL 3 --}}
+            <div class="col-3"></div>
+        </div>
+
+        {{-- ROW 2 --}}
+        <div class="row">     
+            {{-- COL 1 --}}
             <div style="padding-left:100px" class="col">
                 <form action="{{ route('Group.Update', $group[0]->id) }}" method="POST">
                 @csrf

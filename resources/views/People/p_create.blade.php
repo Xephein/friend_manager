@@ -28,7 +28,21 @@
 
         <div style="height:20px"></div>
 
-        
+        {{-- ROW 1 --}}
+        <div class="row">
+
+            <div class="col-3"></div>
+
+            <div class="col-6">
+                @if (session()->has('message'))
+                <div class="alert alert-success">
+                    <p>{{ session()->get('message') }}
+                </div>
+                @endif
+            </div>
+
+            <div class="col-3"></div>
+        </div>
 
         <form action="{{ route('People.Store') }}" method="POST">
             @csrf
@@ -57,8 +71,8 @@
                 </div>
 
                 <div class="col"></div>
-                </div>
             </div>
+            
             <div class="row" style="height:20px"></div>
             <div class="row">
                 <div class="col"></div>
