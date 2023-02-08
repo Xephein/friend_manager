@@ -101,7 +101,11 @@ Route::get('/Group_member/edit/{id}', [GroupPersonController::class, 'edit'])->n
 Route::patch('/Group_member/{id}', [GroupPersonController::class, 'update'])->name('Grpmbr.Update');
 
 // Delete
-Route::delete('/Group_member/{group_id}{member_id}', [GroupPersonController::class, 'destroy'])->name('Grpmbr.Destroy');
+Route::delete('/Group_member/{group_id}/{member_id}', [GroupPersonController::class, 'destroy'])
+    ->where([
+        'group_id' => '[0-9]+',
+        'member_id' => '[0-9]+'
+    ])->name('Grpmbr.Destroy');
 // Route::resource('People', PersonController::class);
 
 // Multiple HTTP verbs

@@ -76,7 +76,7 @@
                             <th></th>
                         </tr>
                         @foreach ($members as $member)
-                        <form action="{{ route('Grpmbr.Destroy', [$group[0]->id, $member->id]) }}" method="POST">
+                        <form action="{{ route('Grpmbr.Destroy', ['group_id' => $group[0]->id, 'member_id' => $member->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <tr>
