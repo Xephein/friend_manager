@@ -17,16 +17,11 @@ class GroupController extends Controller
     {
         $groups = DB::table('groups')
         ->select('id', 'group_name')
-        ->get();
-
-        $count = DB::table('group_person')
-        ->selectRaw('group_id, count(people_id) as number_of_members')
-        ->groupby('group_id')
+        ->orderBy('group_name')
         ->get();
 
         return view('Group.g_index')
-        ->with('groups', $groups)
-        ->with('count', $count);
+        ->with('groups', $groups);
     }
 
     /**

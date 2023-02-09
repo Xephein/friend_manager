@@ -46,7 +46,7 @@
                 @foreach ($groups as $group)
                     <tr>
                         <td>{{ $group->group_name }}</td>
-                        <td>{{ $count[$loop->index]->number_of_members }}</td>
+                        <td>{{ DB::table('group_person')->where('group_id', $group->id)->count('people_id') }}</td>
                         <td>
                             <a href="{{ route('Group.Edit', $group->id) }}"><button style="float:left" type="button" class="badge bg-warning">Szerkesztés</button></a>
                             <form action="{{ route('Group.Destroy', $group->id) }}" method="POST">
