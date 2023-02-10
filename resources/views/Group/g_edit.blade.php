@@ -76,19 +76,19 @@
                             <th>Keresztnév</th>
                             <th></th>
                         </tr>
-                        @foreach ($members as $member)
-                        <form action="{{ route('Grpmbr.Destroy', ['group_id' => $group[0]->id, 'member_id' => $member->id]) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
+                        @foreach ($members as $member) 
                         <tr>
+                            <form action="{{ route('Grpmbr.Destroy', ['group_id' => $group[0]->id, 'member_id' => $member->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
                             <input type="hidden" value="{{ $member->id }}">
                             <td>{{ $member->lastname }}</td>
                             <td>{{ $member->firstname }}</td>
                             <td>
                                 <button style="margin:15px 0px 0px 0px;float:right" type="submit" class="badge bg-danger">Törlés</button>
                             </td>
-                        </tr>
                         </form>
+                        </tr>
                         @endforeach
                         
                     </table>
