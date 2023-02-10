@@ -1,0 +1,60 @@
+body {
+    background-color: #edf2eb;
+}
+
+nav {
+    background-color: #478247;
+    height: 72px;
+}
+
+.nav-link-custom {
+    margin: 0px 15px 0px 15px;
+    font-weight: 700;
+    color: #9AB59A;
+    text-decoration: none;
+    transition: color 250ms;
+}
+
+.nav-link-custom:hover {
+    color: #778c77;
+    text-decoration: none;
+}
+
+.nav-link-here {
+    margin: 0px 10px 0px 10px;
+    font-weight: 700;
+    color: #465346;
+    text-decoration: none;
+    cursor: default;
+}
+
+.text-custom {
+    color: #2E362E;
+    text-align: justify;
+    font-weight: 400;
+}
+
+h2, .h4-custom {
+    color: #2e362e;
+    font-weight: 400;
+}
+
+a {
+    color: #478247;
+}
+
+a:hover {
+    color: #a3a058;
+}
+
+.table-custom {
+    background-color: #478247;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.table-custom tr:nth-child(even) {background-color: #3A693A;}
+.table-custom tr:last-child td:first-of-type {border-bottom-left-radius: 10px;}
+.table-custom tr:last-child td:last-of-type {border-bottom-right-radius: 10px;}
+/* .table-custom tr:last-child form td:f {border-bottom-left-radius: 10px;}
+.table-custom tr:last-child form td:last-child {border-bottom-right-radius: 10px;} */

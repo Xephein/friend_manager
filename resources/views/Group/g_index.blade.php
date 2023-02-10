@@ -6,21 +6,22 @@
         <meta name = "viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{ url('/css/overhaul.css') }}" />
     </head>
     <body>
 
         <!-- Navigációs csík -->
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <nav class="navbar navbar-expand-sm">
             <div class="container-fluid">
                 <ul class="navbar nav">
                     <li class="nav_item">
-                        <a class="nav-link" href="{{ route('People.Create') }}">Ember hozzáadása</a>
+                        <a class="nav-link-custom" href="{{ route('People.Create') }}">Ember hozzáadása</a>
                     </li>
                     <li class="nav_item">
-                        <a class="nav-link" href="{{ route('People.Manage') }}">Ember szerkesztése</a>
+                        <a class="nav-link-custom" href="{{ route('People.Manage') }}">Ember szerkesztése</a>
                     </li>
                     <li class="nav_item">
-                        <a class="nav-link disabled" href="{{ route('Group.Manage') }}">Barátcsoportok szerkesztése</a>
+                        <p class="nav-link-here" href="{{ route('Group.Manage') }}">Barátcsoportok szerkesztése</p>
                     </li>
                 </ul>
             </div>
@@ -30,12 +31,12 @@
         {{-- ROW 1 --}}
         <div class="row">
             {{-- COL 1 --}}
-            <div class="col"></div>
+            <div class="col-4"></div>
 
             {{-- COL 2 --}}
-            <div class="col">
+            <div class="col-4">
                 @if (count($groups) != 0)
-                <table class="table table-dark table-striped">
+                <table class="table table-custom table-borderless">
                     <tr>
                         <th>Csoport neve</th>
                         <th>Létszám</th>
@@ -60,13 +61,13 @@
                 </table>
                 @else
                 <div class="d-flex justify-content">
-                    <h4>Egyelőre nincsenek csoportok...</h4>
+                    <h4 class="h4-custom">Egyelőre nincsenek csoportok...</h4>
                     <a href="{{ route('Group.Create') }}"><button style="margin-left:10px" type="button" class="badge bg-primary">Csoport létrehozása</button></a>
                 </div>
                 @endif
             </div>
 
-            <div class="col">
+            <div class="col-4">
             </div>
 
         </div>

@@ -6,21 +6,22 @@
         <meta name = "viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{ url('/css/overhaul.css') }}" />
     </head>
     <body>
 
         <!-- Navigációs csík -->
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <nav class="navbar navbar-expand-sm">
             <div class="container-fluid">
                 <ul class="navbar nav">
                     <li class="nav_item">
-                        <a class="nav-link" href="{{ route('People.Create') }}">Ember hozzáadása</a>
+                        <a class="nav-link-custom" href="{{ route('People.Create') }}">Ember hozzáadása</a>
                     </li>
                     <li class="nav_item">
-                        <a class="nav-link" href="{{ route('People.Manage') }}">Ember szerkesztése</a>
+                        <a class="nav-link-custom" href="{{ route('People.Manage') }}">Ember szerkesztése</a>
                     </li>
                     <li class="nav_item">
-                        <a class="nav-link" href="{{ route('Group.Manage') }}">Barátcsoportok szerkesztése</a>
+                        <a class="nav-link-custom" href="{{ route('Group.Manage') }}">Barátcsoportok szerkesztése</a>
                     </li>
                 </ul>
             </div>
@@ -32,12 +33,12 @@
         <div class="row" style="margin:0px 15px 0px 15px">
 
             {{-- COL 1 --}}
-            <div class="col">
+            <div class="col-2">
                 {{-- Szerkesztéshez gyorsnavigációs lista jöhetne ide --}}
             </div>
 
             {{-- COL 2 --}}
-            <div class="col">
+            <div class="col-4">
                 @if (session()->has('message'))
                     <div class="alert alert-success">
                         <p><h4>Figyelem!</h4>
@@ -48,7 +49,7 @@
                 @csrf
                 @method('PATCH')
                 @if ($errors->any())
-                    <div style="margin-left:5px" class="alert alert-warning">Valami nem sikerült... </div>
+                    <div style="margin-left:5px" class="alert alert-warning">Valami nem sikerült...</div>
                     <ul style="margin-left:5px" class="alert alert-warning">
                     @foreach ($errors->all(); as $error)
                         <li style="margin-left:10px"> {{ $error }} </li>
@@ -56,28 +57,28 @@
                     </ul>
                 @endif
                     
-                    <label for="lname" class="form-label">Vezetéknév: </label>
+                    <label for="lname" class="form-label text-custom">Vezetéknév: </label>
                     <input type="text" class="form-control" id="lname" name="lastname" value = "{{ $person->lastname }}">
                     
                     <div style="height:10px"></div>
 
-                    <label for="fname" class="form-label">Utónév: </label>
+                    <label for="fname" class="form-label text-custom">Utónév: </label>
                     <input type="text" class="form-control" id="fname" name="firstname" value = "{{ $person->firstname }}">
                     
                     <div style="height:20px"></div>
                 
                     
-                    <button type="submit" class="btn btn-warning">Módosítás</button>
+                    <button type="submit" class="btn btn-warning text-custom">Módosítás</button>
                 </form>
             </div>
 
             {{-- COL 3 --}}
-            <div class="col">
+            <div class="col-4">
             @if (count($friendgroups) == 0)
-            <h4>{{ $person->firstname }} nem tagja egy barátcsoportnak sem.</h4>
+            <h4 class="h4-custom">{{ $person->firstname }} nem tagja egy barátcsoportnak sem.</h4>
             @else
-            <h4>Barátcsoportok</h4>
-            <table class="table table-dark table-striped">
+            <h4 class="h4-custom">Barátcsoportok</h4>
+            <table class="table table-custom table-borderless">
                 <tr>
                     <th>Csoport neve</th>
                     <th></th>
@@ -97,7 +98,7 @@
             @endif
             </div>
             {{-- COL 4 --}}
-            <div class="col">
+            <div class="col-2">
                 {{-- Elérhető csoportokhoz csatlakozási lehetőség --}}
             </div>
         </div>
@@ -105,12 +106,12 @@
         {{-- ROW 2 --}}
         <div class="row" style="margin:30px 15px 0px 15px">
             {{-- COL 1 --}}
-            <div class="col"></div>
+            <div class="col-2"></div>
             {{-- COL 2 --}}
-            <div class="col"> 
+            <div class="col-4"> 
                 @if (count($friends) != 0)
-                <h4 style="align"> {{ $person->firstname }} barátai</h4>
-                <table class="col table table-dark table-striped">
+                <h4 class="h4-custom"> {{ $person->firstname }} barátai</h4>
+                <table class="table table-custom table-borderless">
                     <tr>
                         <th>Vezetéknév</th>
                         <th>Utónév</th>
@@ -128,8 +129,8 @@
                     </tr>
                 @endforeach
                 @else
-                <h4 style="align"> {{ $person->firstname }} eléggé magányos...</h4>
-                <p>Adj hozzá barátokat!</p>
+                <h4 class="h4-custom"> {{ $person->firstname }} eléggé magányos...</h4>
+                <p class="text-custom">Adj hozzá barátokat!</p>
 
                 @endif
                 {{-- @foreach ($friends2 as $friend)
@@ -141,9 +142,10 @@
                 </table>
             </div>
             {{-- COL 3 --}}
-            <div class="col"> <h4>Barátok hozzáadása</h4>
+            <div class="col-4"> 
                 @if (count($nonfriends) != 0)
-                    <table class="table table-dark table-striped">
+                <h4 class="h4-custom">Barátok hozzáadása</h4>
+                    <table class="table table-custom table-borderless">
                         <tr>
                             <th>Vezetéknév</th>
                             <th>Utónév</th>
@@ -162,10 +164,13 @@
                         </tr>                            
                         @endforeach
                     </table>
+                @else
+                    <h4 class="h4-custom">Egyelőre nincs más az adatbázisban.</h4>
+                    <p class="text-custom"><a href="{{ route('People.Create') }}">Ezen a linken</a> megváltoztathatod a helyzetet.</p>
                 @endif
             </div>
             {{-- COL 4 --}}
-            <div class="col"></div>
+            <div class="col-2"></div>
         
         </div>
 
